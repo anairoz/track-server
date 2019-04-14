@@ -12,24 +12,28 @@ create table user
   updateDate timestamp                          not null default current_timestamp() on update current_timestamp()
 );
 
-create table company
-(
-	id			integer auto_increment primary key not null,
-    companyName	varchar(50)						not null unique,
-    createDate	timestamp						not null default current_timestamp(),
-    updateDate	timestamp						not null default current_timestamp() on update current_timestamp()
-);
-
 alter table user
   add column password varchar(50) not null;
 
 alter table user
 modify column email varchar(50) not null unique;
 
-alter table useer 
-add constraint fk_companyId 
-foreign key (id) references company(id);
-    
+create table company
+(
+	id			integer auto_increment primary key not null,
+    name	varchar(50)						not null unique,
+    createDate	timestamp						not null default current_timestamp(),
+    updateDate	timestamp						not null default current_timestamp() on update current_timestamp()
+);
 
-insert into user(email, phone, password, firstName, lastName, role)
-values ('volodyakrajetsky@gmail.com', '0502220390', 'password', 'Volodymyr', 'Kraiteskyi', 'admin');
+alter table company
+add column email varchar(50) not null unique;
+
+alter table user
+add constraint fk_companyId
+foreign key (companyId) references company(id);
+
+insert into company(name, email) values ('Fedex','fedex@gmail.com');
+    
+insert into user(email, phone, password, firstName, lastName, role, companyId)
+values ('volodyakrajetsky@gmail.com', '0502220390', 'password', 'Volodymyr', 'Kraiteskyi', 'admin', 1);
