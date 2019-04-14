@@ -3,15 +3,14 @@ import {
   Column,
   CreatedAt,
   DataType,
+  HasMany,
   Model,
   PrimaryKey,
   Table,
   Unique,
-  UpdatedAt,
-  HasMany
+  UpdatedAt
 } from "sequelize-typescript";
 import User from "./user";
-
 
 @Table({
   timestamps: true,
@@ -24,10 +23,12 @@ export default class Company extends Model<Company> {
   @Column
   public id: number;
 
+  @Column(DataType.TEXT)
+  public name: string;
+
   @Unique
   @Column(DataType.TEXT)
-  public companyName: string;
-
+  public email: string;
 
   @CreatedAt
   @Column
@@ -37,6 +38,6 @@ export default class Company extends Model<Company> {
   @Column
   public updateDate: Date;
 
-	@HasMany(() => User)
-  users: User[];
+  @HasMany(() => User)
+  public users: User[];
 }

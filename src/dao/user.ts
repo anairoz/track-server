@@ -1,15 +1,15 @@
 import {
   AutoIncrement,
+  BelongsTo,
   Column,
   CreatedAt,
   DataType,
+  ForeignKey,
   Model,
   PrimaryKey,
   Table,
   Unique,
-  UpdatedAt,
-  ForeignKey,
-  BelongsTo
+  UpdatedAt
 } from "sequelize-typescript";
 import Company from "./company";
 
@@ -51,13 +51,12 @@ export default class User extends Model<User> {
   @Column
   public updateDate: Date;
 
-  @ForeignKey (()=> Company)
+  @ForeignKey (() => Company)
   @Column
   public companyId: number;
 
   @BelongsTo (() => Company)
-  company: Company;
-
+  public company: Company;
 
   public isUserAdmin(): boolean {
     return this.role === "admin";
