@@ -61,9 +61,5 @@ export default class User extends Model<User> {
   public isUserAdmin(): boolean {
     return this.role === "admin";
   }
-  public async companyEmail() {
-      const comp = await Company.findByPk(this.companyId);
-      return comp.email;
-  }
 
 }

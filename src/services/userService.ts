@@ -14,12 +14,15 @@ export default class UserService {
 
     public static async loginCheck( userEmail: any, password: any, companyEmail: any) {
 
-        const user = await User.findOne({ where: {email: userEmail}});
+        const user = await User.findOne({ where: {email: userEmail}, include: [Company]});
 
-        if (user && user.email === userEmail && user.password === password && user.companyEmail() === companyEmail  ) {
+        if (user && user.email === userEmail && user.password === password && user.company.email === companyEmail  ) {
             return user;
-        } else {
+        } else { try {
             throw new Error("Such user does not exist");
+            } catch (e) {
+              console.log(e.name + ": " + e.message);
+            }
         }
 
     }
