@@ -8,6 +8,7 @@ import * as contextService from "request-context";
 import {sequelize} from "./config/db";
 import errorMiddleware from "./config/ErrorHandler";
 import logger from "./config/logger";
+import * as login from "./routes/login";
 import * as routes from "./routes/user";
 import UserService from "./services/userService";
 
@@ -41,7 +42,7 @@ app.all("/admin/*", async (req, res, next) => {
 });
 
 routes.register(app);
-
+login.register(app);
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
     next(httpErrors(404));
