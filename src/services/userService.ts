@@ -12,4 +12,16 @@ export default class UserService {
         return User.findAll();
     }
 
+    public static async loginCheck( userEmail: any, password: any, companyEmail: any) {
+
+        const user = await User.findOne({ where: {email: userEmail}});
+
+        if (user && user.email === userEmail && user.password === password && user.companyEmail() === companyEmail  ) {
+            return user;
+        } else {
+            throw new Error("Such user does not exist");
+        }
+
+    }
+
 }
