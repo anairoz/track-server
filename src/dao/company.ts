@@ -40,4 +40,8 @@ export default class Company extends Model<Company> {
 
   @HasMany(() => User)
   public users: User[];
+
+  public getEmail() {
+    return this.email;
+  }
 }
