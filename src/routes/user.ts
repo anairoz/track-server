@@ -1,14 +1,14 @@
 import express = require("express");
-import UserService from "../services/userService";
+import PersonService from "../services/personService";
 
 export const register = (app: express.Application) => {
 
-    app.get("/users", async (req: any, res) => {
-        res.json(await UserService.findAll());
+    app.get("/persons", async (req: any, res) => {
+        res.json(await PersonService.findAll());
     });
 
-    app.get("/users/:id", async (req: any, res) => {
-        res.json(await UserService.findById(req.params.id));
+    app.get("/persons/:id", async (req: any, res) => {
+        res.json(await PersonService.findById(req.params.id));
     });
 
 };

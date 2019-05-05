@@ -58,7 +58,7 @@ export default class User extends Model<User> {
   @BelongsTo (() => Company)
   public company: Company;
 
-  public isUserAdmin(): boolean {
+  public  isUserAdmin(): boolean {
     return this.role === "admin";
   }
 
